@@ -80,7 +80,26 @@ Cevap) -Veritabanı Yöneticisi(DBA):Tüm veritabanı üzerinde işlemler yapma 
 -Misafir Kullanıcı: Veri ekleme,silme yetkisi yoktur. Belli tablolarda sınırlı okuma yetkisine sahiptir.
 
 9. Soru
-Veritabanı, verileri organize bir şekilde depolamak,yönetmek,saklamak ve erişmek için kullanılan araçlardır. Genellikle birbiriyle ilişkili bilgileri içerir. Kısaca verilerin depolandığı yapıdır.
+Cevap) Veritabanı, verileri organize bir şekilde depolamak,yönetmek,saklamak ve erişmek için kullanılan araçlardır. Genellikle birbiriyle ilişkili bilgileri içerir. Kısaca verilerin depolandığı yapıdır.
 VTYS ise veritabanlarını tanımlamak, kullanmak, değiştirmek ve çeşitli işlem yapmak için tasarlanmış yazılımdır. Verinin güvenliğini, bütünlüğünü sağlar. MySQL, Oracle yazılımları VTYS'dir. Kısaca verilere erişimi ve yönetimini sağlar.
 
+10. Soru
+Cevap) İlişkisel veri modeli, birbiriyle bir şekilde ilişkili olan çeşitli türdeki bilgileri depolamak için kullanılan araçlardır.Kısaca verileri depolayan ve aralarında bir bağlantı noktası sağlayan bir veri tabanıdır.
 
+11. Soru
+Cevap) 1. Tablo
+-Öğrenciler: Öğrencilerin bilgilerini saklar.
+Sütunlar: Öğrenci No (birincil anahtar), Bölüm adı, Fakülte
+-Bölümler: Üniversitedeki bölümleri temsil eder.
+Sütunlar: Bölüm Kodu(birincil anahtar), Bölüm adı, Fakülte
+-Dersler: Dersleri ifade eder.
+Sütunlar: Ders Kodu(birincil anahtar), Ders adı, Kredii Bölüm Kodu(Yabancı anahtar)
+-Öğretmenler: Dersi veren öğretmenler.
+Sütunlar: ÖğretmenID(birincil anahtar), İsim, Soyisim, Bölüm Kodu(Yabancı anahtar)
+-Notders: Öğrencilerin not ve aldıkları dersleri tutar.
+Sütunlar: Öğrenci No, Ders No, Not
+Tablolar Arası İlişkiler
+-Öğrenciler birden fazla ders alabilir ve her ders birden çok öğrenci tarafından alınabilir. (çoka çok)
+-Bir bölümde birden fazla öğretmen vardır. (bire çok)
+-Bir dersi bir öğretmen verebilir. (birebir)
+-Bir öğrencinin birden fazla notu olabilir (bire çok)
