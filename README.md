@@ -63,5 +63,24 @@ Yabancı Anahtar: Birincil anahtarda olduğu gibi sütun yabancı anahtar olarak
 Farklılıkları: Birincil anahtar tablodaki her kaydı benzersiz şekilde tanımlar.
 Yabancı anahtar ise iki tablo arasında ilişki kurmak için kullanılır.
 
+7. Soru
+Cevap) -Veritabanı Yöneticisi(DBA): Veritabanının tasarımı, performans analizi, erişim yetkilerini düzenleme, yedekleme ve geri yükleme, veri bütünlüğünü sağlama görevlerini üstlenir.
+-Uygulama Geliştiriciler: Temel görevleri, veritabanlarını kullanabilecek son kullanıcıya yönelik yazılımlar geliştirmektir. Veritabanı ile etkileşimli yazılımlar yazar.
+-Sorgu Dili Kullanıcıları: İhtiyaç duyulan hazırlamaktan ve işletmekten sorumludur. SQL gibi sorgu dillerini kullanırlar.
+-Son Kullanıcılar: Uygulama Programcıları tarafından geliştirilen yazılımları kullanır. Bu kullanıcıların veritabanı yapısı hakkında bilgi sahibi olmasına ve üst düzey kullanıcı olmasına gerek yoktur. 
+
+8. Soru
+Cevap) -Veritabanı Yöneticisi(DBA):Tüm veritabanı üzerinde işlemler yapma yetkisine sahiptir. Tablo güncelleme,silme...
+-Uygulama Geliştiriciler: Mevcut veritabanındaki yapıları değiştirme yetkisine sahiptir.
+-Veri Analisti: Tablolar üzerinde analiz yapma yetkisine sahiptir.
+-Veri Giriş Personeli: Mevcut verileri güncelleyebilir ve belirli tablolara veri ekleyebilir.
+-Raporlama Uzmanı: Veritabanından raporlar oluşturabilir.
+-Güvenlik Yöneticisi: Kullanıcı hesaplarını yönetebilir. Erişim izinlerini düzenleyebilir.
+-Yedekleme Operatörü: Veritabanının yedeklenmesini ve geri yüklenmesi işlemlerini gerçekleştirir.
+-Misafir Kullanıcı: Veri ekleme,silme yetkisi yoktur. Belli tablolarda sınırlı okuma yetkisine sahiptir.
+
+9. Soru
+Veritabanı, verileri organize bir şekilde depolamak,yönetmek,saklamak ve erişmek için kullanılan araçlardır. Genellikle birbiriyle ilişkili bilgileri içerir. Kısaca verilerin depolandığı yapıdır.
+VTYS ise veritabanlarını tanımlamak, kullanmak, değiştirmek ve çeşitli işlem yapmak için tasarlanmış yazılımdır. Verinin güvenliğini, bütünlüğünü sağlar. MySQL, Oracle yazılımları VTYS'dir. Kısaca verilere erişimi ve yönetimini sağlar.
 
 
