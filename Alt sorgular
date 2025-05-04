@@ -1,0 +1,122 @@
+use galeri
+create table musteri(
+Mno int primary key identity(1,1),
+Madi nvarchar(50),
+Msoyadi nvarchar(50),
+Madres nvarchar(50),
+Mtelefon nvarchar(50)
+);
+
+create table araclar(
+Aracno int identity(1,1) primary key,
+yil int,
+model nvarchar(50),
+marka nvarchar(50),
+plaka nvarchar(50),
+fiyat float
+);
+
+create table satislar(
+satisNo int primary key not null,
+MNo int foreign key (Mno) references musteri(Mno),
+AracNo int foreign key (Aracno) references araclar(Aracno),
+SatisTarihi datetime,
+Fiyat float
+);
+
+create table alislar(
+alisNo int primary key not null,
+MNo int foreign key (Mno) references musteri(Mno),
+AracNo int foreign key (Aracno) references araclar(Aracno),
+AlisTarihi datetime,
+Fiyat float
+);
+use galeri
+insert into araclar values('2020','cla200', 'mercedes', '38SA215', '800000');
+insert into araclar values ( '2002' , 'GLA' ,'mercedes', '38G12', '65000');
+insert into araclar values ( '2020' , 'M5' ,'BMW', '47S21', '185000');
+insert into araclar values ( '2025' , 'EGEA' ,'Fiat', '36Z10', '1800000');
+insert into araclar values ( '2023' , 'COROLLA' ,'toyota', '58A14', '85000');
+insert into araclar values ( '2024' , 'A8' ,'audi', '30B84', '95000');
+
+insert into musteri 
+values('Fatma Nur','Kılıçkaya','Kayseri','45667')
+insert into musteri 
+values('Sıla','Aydoğdu','Ankara','12354')
+insert into musteri 
+values('İbrahim','Metin','İstanbul','78652')
+insert into musteri 
+values('Mustafa','Erdoğan','İzmir','75525')
+insert into musteri 
+values('Furkan','Altıntop','Manisa','48963')
+
+insert into satislar values(1,1,1,'2024','800000');
+insert into satislar values(2,2,3,'2023','500000');
+insert into satislar values(3,3,5,'2022','20000000');
+insert into satislar values(4,4,2,'2024','30000000');
+
+
+insert into alislar values(3,1,2,'2025','882000');
+insert into alislar values(5,1,5,'2024','800034');
+insert into alislar values(2,1,4,'2023','8820003');
+insert into alislar values(4,1,1,'2021','88200034');
+!--1- satış yapılan müşterilerin simlerinini
+!-- listelemek için gerekli SQL ifadesini yazın
+select  M.Madi, M.Msoyadi
+from satislar s
+join musteri m on M.Mno=S.Mno
+
+!--2-2.	Hangi müşteriden hangi aracın alındığını listelemek için gerekli SQL ifadesini yazınız.
+select (musteri.Madi+ ' ' + musteri.Msoyadi) as musteri, araclar.model
+from alislar
+inner join musteri on musteri.Mno = alislar.MNo
+inner join araclar on araclar.Aracno = alislar.AracNo
+
+!-- 3.	Her bir müşteriden alınan araçların sayısını listelemek için gerekli SQL ifadesini yazınız.
+select count(a.MNo) from alislar as a
+inner join musteri as m on m.Mno = a.MNo
+--4. Satılan araçların marka ve modelini bulmak için gerekli SQL ifadesini yazınız.
+select araclar.marka, araclar.model
+from satislar
+join araclar on  araclar.Aracno=satislar.AracNo
+
+--5. Toplam satış ve toplam alım tutarlarını ve bunların farkını bulmak için gerekli SQL ifadesini yazınız.
+select sum(satislar.Fiyat) as toplamSatis, sum(alislar.Fiyat) as toplamAlis, sum(satislar.Fiyat)-sum(alislar.Fiyat) as fark
+from satislar,alislar
+
+--6. Hiç satışı yapılmamış araçları listelemek için gerekli SQL ifadesini yazınız.
+select araclar.marka, araclar.model
+from araclar
+left join satislar on araclar.AracNo = satislar.AracNo
+where satislar.AracNo is null
+
+--7. Her aracın ortalama satış tutarını bulmak için gerekli SQL ifadesini yazınız.
+select AracNo, AVG(satislar.Fiyat) as ortalama_satis_tutari
+from satislar
+group by AracNo;
+
+--8. Alımı ve satışı yapılan tüm araçların marka, model ve alım-satış sayısını listelemek için gerekli SQL ifadesiniz yazınız.
+SELECT araclar.marka, araclar.model, COUNT(DISTINCT alislar.AracNo) AS alis_sayisi,COUNT(DISTINCT satislar.AracNo) AS satis_sayisi
+FROM araclar
+LEFT JOIN alislar ON araclar.AracNo = alislar.AracNo
+LEFT JOIN satislar ON araclar.AracNo = satislar.AracNo
+GROUP BY araclar.marka, araclar.model;
+
+
+--9. 20000’den fazla tutara satılan araçları kimlerin hangi aracı aldığını bulmak için gerekli SQL ifadesini yazınız.
+select m.Madi AS MusteriAdi,
+    m.Msoyadi AS MusteriSoyadi,
+    a.marka AS Marka,
+    a.model AS Model,
+    s.Fiyat AS SatisFiyati
+from satislar s
+JOIN musteri m ON s.MNo = m.Mno
+JOIN araclar a ON s.AracNo = a.Aracno
+WHERE s.Fiyat > 20000;
+
+--10. Tokatta bulunan müşterilere satışı yapılan araçları listelemek için gerekli SQL ifadesini yazınız.
+select musteri.Madi,musteri.Msoyadi, araclar.marka,araclar.model
+from satislar
+join musteri on musteri.Mno=satislar.MNo
+join araclar on satislar.AracNo=araclar.Aracno
+where musteri.Madres = '%Tokat%';
