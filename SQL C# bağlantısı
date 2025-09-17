@@ -1,0 +1,59 @@
+using System;
+using Microsoft.Data.SqlClient; 
+
+class Program
+{
+    static void Main()
+    {
+        // Bağlantı dizesi (Windows Authentication kullanıyoruz)
+        string connectionString = @"Server=localhost;Database=yasinkütüphanesi;Integrated Security=True;TrustServerCertificate=True;";
+
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            try
+            {
+                connection.Open();
+                Console.WriteLine("SQL Server'a bağlantı başarılı!");
+
+                // Kitaplar tablosundan ilk 5 kitabın adını alalım
+                string queryKitaplar = "SELECT TOP 5 * FROM kitaplar";
+                SqlCommand commandKitaplar = new SqlCommand(queryKitaplar, connection);
+
+                SqlDataReader readerKitaplar = commandKitaplar.ExecuteReader();
+
+                Console.WriteLine("Kitaplar tablosundaki ilk 5 kayıt:");
+
+                while (readerKitaplar.Read())
+                {
+                    // Burada ilk kolonun (ID ya da KitapAdı olabilir) verisini yazdırıyoruz.
+                    Console.WriteLine(readerKitaplar[0].ToString());
+                }
+
+                readerKitaplar.Close();
+
+                // Üyeler tablosundan ilk 5 üyenin adını alalım
+                string queryUyeler = "SELECT TOP 5 * FROM uyeler";
+                SqlCommand commandUyeler = new SqlCommand(queryUyeler, connection);
+
+                SqlDataReader readerUyeler = commandUyeler.ExecuteReader();
+
+                Console.WriteLine("\nÜyeler tablosundaki ilk 5 kayıt:");
+
+                while (readerUyeler.Read())
+                {
+                    Console.WriteLine(readerUyeler[0].ToString());
+                }
+
+                readerUyeler.Close();
+
+                // İstersen aynı şekilde yazarlar veya emanet tablosu için de sorgu yazabilirsin.
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Hata oluştu: " + ex.Message);
+            }
+        }
+
+        Console.WriteLine("\nProgram sonlandı.");
+    }
+}
