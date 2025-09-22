@@ -1,0 +1,99 @@
+use YKÖ
+create table users(
+ID int identity(1,1) not null primary key,
+userName nvarchar (30),
+Password_ int,
+NameSurname nvarchar(50),
+Email nvarchar(50),
+Gender char(1),
+Birthdate date,
+Createdate date,
+TelNo1 char(11),
+TelNo2 char(11),)
+
+create table Orders(
+ID int identity(1,1) not null primary key,
+UserID int not null foreign key references users(ID),
+DateID date,
+TotalPrice decimal(11,3),
+Status varchar(30),
+AddressID int,)
+
+create table OrderDetails(
+ID int identity(1,1) not null primary key,
+OrderID int,
+ItemID int,
+Amount int,
+UnıtPrice int,
+LineTotal int,)
+
+create table Items(
+ID int identity(1,1) not null primary key,
+ItemCode nvarchar(50),
+ItemName nvarchar(20),
+UnıtPrice int,
+Category1 nvarchar(30),
+Category2 nvarchar(30),
+Category3 nvarchar(30),
+Category4 nvarchar(30),
+Brand  nvarchar(30))
+create table countries(
+CountryID int identity(1,1) not null primary key,
+Country nvarchar(50),)
+create table cities(
+ID int identity(1,1) not null primary key,
+CountryID int not null foreign key references countries(CountryID),
+City nvarchar(50),)
+
+create table towns(
+ID int identity(1,1) not null primary key,
+CıtyID int not null foreign key references cities(ID),
+town varchar(30),)
+create table districts(
+ID int identity(1,1) not null primary key,
+TownID int not null foreign key references towns(ID),
+districts nvarchar(50),)
+create table address_(
+ID int identity(1,1) not null primary key,
+UserID int not null foreign key references users(ID),
+CountryID int not null foreign key references countries(CountryID),
+CityID int not null foreign key references cities(ID),
+TownID int not null foreign key references towns(ID),
+DistrictID int not null foreign key references districts(ID),
+PostalCode int,
+AddressText nvarchar(50),)
+
+create table İnvoices(
+ID int identity(1,1) not null primary key,
+OrderID int not null foreign key references Orders(ID),
+Date_ date,
+AddressID int not null foreign key references address_(ID),
+CargoFishNo nvarchar(50),
+TotalPrice decimal(10,2),)
+
+create table İnvoicesDetails(
+ID int identity(1,1) not null primary key,
+İnvoiceID int not null foreign key references İnvoices(ID),
+OrderDetailID int not null foreign key references OrderDetails(ID),
+ItemID int not null foreign key references Items(ID),
+AmountID int,
+unitPrice decimal(10,2),
+LineTotal decimal(10,2),)
+
+create table Payments(
+ID int identity(1,1) not null primary key,
+OrderID int not null foreign key references orders(ID),
+PaymentType nvarchar(40),
+PaymentDate decimal (10,2),
+ISOcode varchar(50),
+ApproveCode varchar(50),
+PaymentTotal decimal(10,2),
+)
+
+
+
+
+
+
+
+
